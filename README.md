@@ -39,7 +39,7 @@ npm run dev
 |---|---------|--------|
 | 1 | Project Setup & The Render Loop | [`episode-1-project-setup`](https://github.com/marcelkmedia/threejs-water-island-maldives/tree/episode-1-project-setup) ✅ |
 | 2 | Your First Mesh: A Cube on a Plane | [`episode-2-cube-on-plane`](https://github.com/marcelkmedia/threejs-water-island-maldives/tree/episode-2-cube-on-plane) ✅ |
-| 3 | Lights & Shadows | _coming soon_ |
+| 3 | Lights & Shadows | [`episode-3-lights-and-shadows`](https://github.com/marcelkmedia/threejs-water-island-maldives/tree/episode-3-lights-and-shadows) ✅ |
 | 4 | A Free-Moving Camera | _coming soon_ |
 | 5 | Stylized Look & Materials | _coming soon_ |
 | 6 | Sculpting the Island | _coming soon_ |
