@@ -16,6 +16,13 @@ const renderer = new THREE.WebGPURenderer({ canvas, antialias: true });
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // cap DPR for perf
 renderer.setSize(window.innerWidth, window.innerHeight);
 
+// Map the scene's light values into a pleasant displayable range (filmic look).
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+
+// Turn on shadows, with soft (filtered) edges.
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x7ec8e3); // tropical sky blue
 
@@ -35,6 +42,7 @@ const ground = new THREE.Mesh(
   new THREE.MeshStandardMaterial({ color: 0xe8d8b0 }), // warm sand
 );
 ground.rotation.x = -Math.PI / 2;
+ground.receiveShadow = true; // the ground shows shadows cast onto it
 scene.add(ground);
 
 // A cube, lifted so it rests ON the ground instead of halfway through it.
@@ -43,6 +51,7 @@ const cube = new THREE.Mesh(
   new THREE.MeshStandardMaterial({ color: 0xcc7a4a }), // terracotta
 );
 cube.position.y = 0.5;
+cube.castShadow = true; // the cube blocks light and casts a shadow
 scene.add(cube);
 
 // Ambient light: a soft, even glow from all directions so nothing is pure black.
@@ -52,6 +61,22 @@ scene.add(ambient);
 // Directional light: parallel rays like the sun, giving the cube light and dark sides.
 const sun = new THREE.DirectionalLight(0xffffff, 2);
 sun.position.set(3, 5, 2);
+sun.castShadow = true; // this light casts shadows
+
+// The shadow camera's box — must be big enough to cover the scene.
+sun.shadow.camera.near = 0.5;
+sun.shadow.camera.far = 20;
+sun.shadow.camera.left = -6;
+sun.shadow.camera.right = 6;
+sun.shadow.camera.top = 6;
+sun.shadow.camera.bottom = -6;
+
+// Shadow-map resolution: higher = crisper edges, but more memory.
+sun.shadow.mapSize.set(2048, 2048);
+
+// A small bias stops flat surfaces from shadowing themselves ("shadow acne").
+sun.shadow.bias = -0.0001;
+
 scene.add(sun);
 
 // Which backend did Three.js actually pick? The WebGPU backend object carries an

@@ -7,12 +7,12 @@ on **WebGPU** with hand-written **WGSL** shaders.
 Each episode of the course lives on its own branch, holding the project as it
 stands at the **end** of that episode. Check out a branch, install, and run.
 
-## This branch — `episode-2-cube-on-plane`
+## This branch — `episode-3-lights-and-shadows`
 
-**Episode 2 — Your First Mesh: A Cube on a Plane.** Builds on Episode 1: adds a
-ground plane and a cube (both `MeshStandardMaterial`), an ambient light and a
-sun-like directional light, and a gentle rotation. The cube sits on the sand under
-the tropical sky, lit so it reads as a solid, spinning 3D object.
+**Episode 3 — Lights & Shadows.** Builds on Episode 2: turns on shadow maps and ACES
+tone mapping. The directional light casts a soft shadow (with a configured shadow
+camera, resolution, and bias); the cube casts and the ground receives it, so the
+rotating cube drops a soft shadow onto the sand.
 
 ## Requirements
 
@@ -29,8 +29,8 @@ npm run dev
 
 Open the printed URL (usually `http://localhost:5173`) in a real browser — not an
 editor's built-in preview pane, which often lacks WebGPU. You should see a terracotta
-cube gently rotating on a sandy ground plane under a tropical sky, with a
-`WebGPU · 60 fps`-style readout in the top-left.
+cube gently rotating on a sandy ground plane and casting a soft shadow, under a
+tropical sky, with a `WebGPU · 60 fps`-style readout in the top-left.
 
 ## Build
 
