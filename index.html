@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Maldives — Episode 3</title>
+    <title>Maldives — Episode 4</title>
     <style>
       html, body { margin: 0; height: 100%; overflow: hidden; background: #000; }
       #app { display: block; width: 100vw; height: 100vh; }
@@ -13,6 +13,14 @@
         background: rgba(0, 0, 0, 0.4);
         font: 12px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace;
         color: rgba(255, 255, 255, 0.85); pointer-events: none; white-space: pre;
+      }
+      .dot {
+        position: fixed; left: 50%; top: 50%;
+        width: 8px; height: 8px; margin: -4px 0 0 -4px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.85);
+        box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.4);
+        pointer-events: none; display: none; /* shown only while flying */
       }
       .error {
         position: fixed; inset: 0; display: grid; place-items: center;
@@ -24,6 +32,7 @@
   <body>
     <canvas id="app"></canvas>
     <div class="hud" id="hud"></div>
+    <div class="dot" id="dot"></div>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

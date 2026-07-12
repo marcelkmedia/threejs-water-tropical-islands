@@ -7,12 +7,12 @@ on **WebGPU** with hand-written **WGSL** shaders.
 Each episode of the course lives on its own branch, holding the project as it
 stands at the **end** of that episode. Check out a branch, install, and run.
 
-## This branch — `episode-3-lights-and-shadows`
+## This branch — `episode-4-free-moving-camera`
 
-**Episode 3 — Lights & Shadows.** Builds on Episode 2: turns on shadow maps and ACES
-tone mapping. The directional light casts a soft shadow (with a configured shadow
-camera, resolution, and bias); the cube casts and the ground receives it, so the
-rotating cube drops a soft shadow onto the sand.
+**Episode 4 — A Free-Moving Camera.** Builds on Episode 3: adds delta time
+(`THREE.Timer`) so motion is frame-rate independent, and a first-person **fly camera**
+(`src/FlyCamera.ts`). Hold the **right mouse button** to look (pointer lock hides the
+cursor and shows a centre dot), **W/A/S/D** to move, **Shift** to go faster.
 
 ## Requirements
 
@@ -28,9 +28,9 @@ npm run dev
 ```
 
 Open the printed URL (usually `http://localhost:5173`) in a real browser — not an
-editor's built-in preview pane, which often lacks WebGPU. You should see a terracotta
-cube gently rotating on a sandy ground plane and casting a soft shadow, under a
-tropical sky, with a `WebGPU · 60 fps`-style readout in the top-left.
+editor's built-in preview pane, which often lacks WebGPU. You should see the terracotta
+cube on the sand; **hold the right mouse button and use W/A/S/D** to fly around it
+(Shift to go faster), with a `WebGPU · 60 fps`-style readout in the top-left.
 
 ## Build
 

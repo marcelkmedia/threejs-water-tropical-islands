@@ -1,4 +1,5 @@
 import * as THREE from 'three/webgpu';
+import { FlyCamera } from './FlyCamera';
 
 // Grab the two elements we created in index.html.
 const canvas = document.querySelector<HTMLCanvasElement>('#app')!;
@@ -33,7 +34,10 @@ const camera = new THREE.PerspectiveCamera(
   100,                                    // far clip plane
 );
 camera.position.set(0, 1, 3); // a little up, a little back
-camera.lookAt(0, 0, 0);
+
+// Set up the fly camera (defined in FlyCamera.ts).
+const dot = document.querySelector<HTMLDivElement>('#dot')!;
+const flyCamera = new FlyCamera(camera, renderer.domElement, dot);
 
 // A flat ground plane. PlaneGeometry is born standing up (facing +Z), so we
 // tip it back 90° to lie flat on the ground.
@@ -87,13 +91,22 @@ let frames = 0;
 let fps = 0;
 let lastSample = performance.now();
 
+// A timer measures how much real time passes between frames (delta time).
+const timer = new THREE.Timer();
+
 // The GPU device is requested asynchronously, so we await it before rendering.
 await renderer.init();
 
 // setAnimationLoop calls this function once per display refresh (~60×/second).
 renderer.setAnimationLoop(() => {
-  // Turn the cube a little each frame so it gently spins.
-  cube.rotation.y += 0.01;
+  timer.update();
+  const dt = timer.getDelta(); // seconds since the previous frame
+
+  // Spin the cube at a steady 0.6 radians per second (frame-rate independent).
+  cube.rotation.y += dt * 0.6;
+
+  // Update the fly camera (mouse look + WASD movement).
+  flyCamera.update(dt);
 
   // Count frames and refresh the readout about once a second.
   frames++;
