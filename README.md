@@ -11,13 +11,25 @@ ends at a concrete, runnable goal.
 
 ## How this repo is organized
 
-Each episode lives on **its own branch**, holding the project as it stands at the
-**end** of that episode. Pick an episode, check out its branch, install, and run —
-each branch is a complete, standalone project.
+- **`main`** always holds the **latest** state of the project (right now: the end of
+  Episode 1).
+- Each episode also has **its own branch** — a frozen, standalone snapshot of the
+  project at the end of that episode.
+
+## Getting started
+
+Run the latest version (the default `main` branch):
 
 ```bash
 git clone https://github.com/marcelkmedia/threejs-water-island-maldives.git
 cd threejs-water-island-maldives
+npm install
+npm run dev
+```
+
+Or jump to a specific episode's finished state:
+
+```bash
 git checkout episode-1-project-setup
 npm install
 npm run dev
