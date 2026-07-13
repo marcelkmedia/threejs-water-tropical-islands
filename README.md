@@ -42,7 +42,7 @@ npm run dev
 | 3 | Lights & Shadows | [`episode-3-lights-and-shadows`](https://github.com/marcelkmedia/threejs-water-tropical-islands/tree/episode-3-lights-and-shadows) ✅ |
 | 4 | A Free-Moving Camera | [`episode-4-free-moving-camera`](https://github.com/marcelkmedia/threejs-water-tropical-islands/tree/episode-4-free-moving-camera) ✅ |
 | 5 | Terrain from Noise | [`episode-5-terrain`](https://github.com/marcelkmedia/threejs-water-tropical-islands/tree/episode-5-terrain) ✅ |
-| 6 | Sculpting the Island | _coming soon_ |
+| 6 | Sculpt & Colour the Island | [`episode-6-sculpt-and-colour`](https://github.com/marcelkmedia/threejs-water-tropical-islands/tree/episode-6-sculpt-and-colour) ✅ |
 | 7 | The Ocean Surface: Gerstner Waves | _coming soon_ |
 | 8 | Water Color: Depth, Gradient & Fresnel | _coming soon_ |
 | 9 | Refraction & Transparency | _coming soon_ |
