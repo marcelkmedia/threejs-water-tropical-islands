@@ -41,7 +41,7 @@ npm run dev
 | 2 | Your First Mesh: A Cube on a Plane | [`episode-2-cube-on-plane`](https://github.com/marcelkmedia/threejs-water-tropical-islands/tree/episode-2-cube-on-plane) ✅ |
 | 3 | Lights & Shadows | [`episode-3-lights-and-shadows`](https://github.com/marcelkmedia/threejs-water-tropical-islands/tree/episode-3-lights-and-shadows) ✅ |
 | 4 | A Free-Moving Camera | [`episode-4-free-moving-camera`](https://github.com/marcelkmedia/threejs-water-tropical-islands/tree/episode-4-free-moving-camera) ✅ |
-| 5 | Stylized Look & Materials | _coming soon_ |
+| 5 | Terrain from Noise | [`episode-5-terrain`](https://github.com/marcelkmedia/threejs-water-tropical-islands/tree/episode-5-terrain) ✅ |
 | 6 | Sculpting the Island | _coming soon_ |
 | 7 | The Ocean Surface: Gerstner Waves | _coming soon_ |
 | 8 | Water Color: Depth, Gradient & Fresnel | _coming soon_ |
