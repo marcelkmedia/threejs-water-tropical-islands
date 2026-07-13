@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tropical Islands — Episode 5</title>
+    <title>Tropical Islands — Episode 6</title>
     <style>
       html, body { margin: 0; height: 100%; overflow: hidden; background: #000; }
       #app { display: block; width: 100vw; height: 100vh; }
@@ -22,6 +22,17 @@
         box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.4);
         pointer-events: none; display: none; /* shown only while flying */
       }
+      .tools {
+        position: fixed; left: 50%; bottom: 16px; transform: translateX(-50%);
+        display: flex; gap: 8px; z-index: 10;
+      }
+      .tools button {
+        font: 500 13px/1 system-ui, sans-serif;
+        padding: 8px 12px; border-radius: 8px; cursor: pointer;
+        border: 1px solid rgba(0, 0, 0, 0.15);
+        background: rgba(255, 255, 255, 0.9); color: #1a1a1a;
+      }
+      .tools button.active { background: #bb6a45; color: #fff; border-color: #bb6a45; }
       .error {
         position: fixed; inset: 0; display: grid; place-items: center;
         padding: 2rem; text-align: center;
@@ -33,6 +44,11 @@
     <canvas id="app"></canvas>
     <div class="hud" id="hud"></div>
     <div class="dot" id="dot"></div>
+    <div class="tools">
+      <button id="raise" type="button">Raise ▲</button>
+      <button id="lower" type="button">Lower ▼</button>
+      <button id="reset" type="button">Reset</button>
+    </div>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

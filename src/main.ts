@@ -1,6 +1,7 @@
 import * as THREE from 'three/webgpu';
 import { FlyCamera } from './FlyCamera';
-import { createTerrain } from './terrain';
+import { createTerrain, resetTerrain } from './terrain';
+import { SculptTool } from './SculptTool';
 
 // Grab the two elements we created in index.html.
 const canvas = document.querySelector<HTMLCanvasElement>('#app')!;
@@ -43,9 +44,27 @@ camera.position.set(0, 10, 34); // up and back, looking out over the atoll
 const dot = document.querySelector<HTMLDivElement>('#dot')!;
 const flyCamera = new FlyCamera(camera, renderer.domElement, dot);
 
-// Build the atoll terrain (all the noise + shaping lives in terrain.ts).
+// Build the atoll terrain (noise + height-based colours live in terrain.ts).
 const ground = createTerrain();
 scene.add(ground);
+
+// The raise/lower sculpt brush (see SculptTool.ts).
+const sculpt = new SculptTool(ground, camera, renderer.domElement, scene);
+
+// Wire the toolbar buttons to the tool. Clicking an armed mode again disarms it.
+const raiseBtn = document.querySelector<HTMLButtonElement>('#raise')!;
+const lowerBtn = document.querySelector<HTMLButtonElement>('#lower')!;
+const resetBtn = document.querySelector<HTMLButtonElement>('#reset')!;
+
+function arm(mode: 'raise' | 'lower') {
+  const next = sculpt.getMode() === mode ? null : mode;
+  sculpt.setMode(next);
+  raiseBtn.classList.toggle('active', next === 'raise');
+  lowerBtn.classList.toggle('active', next === 'lower');
+}
+raiseBtn.addEventListener('click', () => arm('raise'));
+lowerBtn.addEventListener('click', () => arm('lower'));
+resetBtn.addEventListener('click', () => resetTerrain(ground.geometry));
 
 // Ambient light: a soft, even glow from all directions so nothing is pure black.
 const ambient = new THREE.AmbientLight(0xffffff, 0.6);
@@ -91,8 +110,8 @@ renderer.setAnimationLoop(() => {
   timer.update();
   const dt = timer.getDelta(); // seconds since the previous frame
 
-  // Update the fly camera (mouse look + WASD movement).
-  flyCamera.update(dt);
+  flyCamera.update(dt); // mouse look + WASD movement
+  sculpt.update();      // brush ring + sculpting
 
   // Count frames and refresh the readout about once a second.
   frames++;

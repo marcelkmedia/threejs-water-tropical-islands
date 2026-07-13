@@ -7,14 +7,15 @@ on **WebGPU** with hand-written **WGSL** shaders.
 Each episode of the course lives on its own branch, holding the project as it
 stands at the **end** of that episode. Check out a branch, install, and run.
 
-## This branch — `episode-5-terrain`
+## This branch — `episode-6-sculpt-and-colour`
 
-**Episode 5 — Terrain from Noise.** Builds on Episode 4: the flat ground becomes a
-tropical **atoll** — a broken ring of low sandy islands around a lagoon, on a flat sea
-floor. All the noise and shaping lives in `src/terrain.ts` (using **simplex-noise**),
-which `main.ts` calls via `createTerrain()`: the plane's vertices are displaced by a
-ring-times-noise height field and its normals recomputed. Distance fog fades the far
-water into the sky. (The water itself comes in a later episode.)
+**Episode 6 — Sculpt & Colour the Island.** Builds on Episode 5. The atoll is now
+**coloured by height** (wet sand → beach → grass, via per-vertex colours in
+`src/terrain.ts`) and **editable by hand**: `src/SculptTool.ts` is a raise/lower brush
+— arm a mode with the toolbar buttons, then hold the **left mouse button** and drag to
+reshape the sand under a soft round brush; the **mouse wheel** resizes it. Normals and
+colours update live after every edit. The **right mouse button** + **W/A/S/D** still
+fly the camera.
 
 ## Requirements
 
@@ -30,10 +31,10 @@ npm run dev
 ```
 
 Open the printed URL (usually `http://localhost:5173`) in a real browser — not an
-editor's built-in preview pane, which often lacks WebGPU. You should see a ring of low
-sandy islands around a flat lagoon, fading into haze; **hold the right mouse button and
-use W/A/S/D** to fly over it (Shift to go faster), with a `WebGPU · 60 fps`-style
-readout in the top-left.
+editor's built-in preview pane, which often lacks WebGPU. You should see the atoll
+coloured by height; click **Raise** or **Lower**, then **hold the left mouse button and
+drag** to reshape it (scroll to resize the brush). **Right mouse button + W/A/S/D**
+flies the camera; a `WebGPU · 60 fps`-style readout sits in the top-left.
 
 ## Build
 

@@ -53,27 +53,59 @@ function terrainHeight(x: number, z: number) {
   return SEA_FLOOR + land * 1.3 + fractalNoise(x, z) * land * 0.15;
 }
 
-/** Builds the atoll: a big subdivided plane, displaced by the height function above,
- *  with its normals recomputed so the sun lights every slope. Returns a ready mesh. */
+// smoothstep-style blend: 0 below a, 1 above b, eased in between.
+const smooth = (a: number, b: number, x: number) => {
+  const t = Math.max(0, Math.min(1, (x - a) / (b - a)));
+  return t * t * (3 - 2 * t);
+};
+
+// Colour stops for the height zones (made once).
+const cDeep = new THREE.Color(0xb3a079); // wet / under-water sand
+const cSand = new THREE.Color(0xe8d8b0); // dry beach sand
+const cGrass = new THREE.Color(0x6f9f5b); // grass on the island tops
+const tmpColour = new THREE.Color();
+
+/** Colour every vertex by its height: wet sand → beach → grass. Call after any edit. */
+export function applyHeightColours(geo: THREE.BufferGeometry) {
+  const pos = geo.attributes.position;
+  const col = geo.attributes.color;
+  for (let i = 0; i < pos.count; i++) {
+    const h = pos.getZ(i);
+    if (h < 0) {
+      tmpColour.copy(cDeep).lerp(cSand, smooth(-0.4, 0.05, h));
+    } else {
+      tmpColour.copy(cSand).lerp(cGrass, smooth(0.12, 0.45, h));
+    }
+    col.setXYZ(i, tmpColour.r, tmpColour.g, tmpColour.b);
+  }
+  col.needsUpdate = true;
+}
+
+/** Reset every vertex back to the original atoll height, and recolour. */
+export function resetTerrain(geo: THREE.BufferGeometry) {
+  const pos = geo.attributes.position;
+  for (let i = 0; i < pos.count; i++) {
+    pos.setZ(i, terrainHeight(pos.getX(i), pos.getY(i)));
+  }
+  pos.needsUpdate = true;
+  geo.computeVertexNormals();
+  geo.computeBoundingSphere(); // keep the bounds fresh so raycasting stays accurate
+  applyHeightColours(geo);
+}
+
+/** Builds the atoll: a big subdivided plane, shaped by the height field and coloured
+ *  by elevation. The geometry stays editable so we can sculpt it. Returns a mesh. */
 export function createTerrain(): THREE.Mesh {
   const geo = new THREE.PlaneGeometry(80, 80, 240, 240);
 
-  // Push every vertex up (or down) by the terrain height at its x/z position.
-  const pos = geo.attributes.position;
-  for (let i = 0; i < pos.count; i++) {
-    const x = pos.getX(i);
-    const y = pos.getY(i); // the plane's own y — becomes world z once we tip it flat
-    pos.setZ(i, terrainHeight(x, y));
-  }
-  pos.needsUpdate = true;
-
-  // The vertices moved, so recompute the normals — otherwise the sun can't tell which
-  // way each slope faces, and the terrain looks flat and dead.
-  geo.computeVertexNormals();
+  // Give the geometry a per-vertex colour attribute, then set heights + colours.
+  const count = geo.attributes.position.count;
+  geo.setAttribute('color', new THREE.BufferAttribute(new Float32Array(count * 3), 3));
+  resetTerrain(geo);
 
   const mesh = new THREE.Mesh(
     geo,
-    new THREE.MeshStandardMaterial({ color: 0xe8d8b0 }), // warm sand
+    new THREE.MeshStandardMaterial({ vertexColors: true }), // colours come from the vertices
   );
   mesh.rotation.x = -Math.PI / 2; // tip the plane flat
   mesh.receiveShadow = true;
