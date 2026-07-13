@@ -1,7 +1,7 @@
 # 3D Water & Islands — Three.js + WebGPU
 
 Companion code for the **3D Water & Islands** course: building a stylized,
-cartoonish tropical "Maldives" island scene with high-quality water — depth-tinted
+cartoonish tropical islands scene with high-quality water — depth-tinted
 shallows, refraction, Fresnel reflections, shoreline foam, caustics, and a bright
 tropical sky — in **Three.js**, rendered on **WebGPU** with hand-written **WGSL**
 shaders.
@@ -19,8 +19,8 @@ its branch.
 ## Getting started
 
 ```bash
-git clone https://github.com/marcelkmedia/threejs-water-island-maldives.git
-cd threejs-water-island-maldives
+git clone https://github.com/marcelkmedia/threejs-water-tropical-islands.git
+cd threejs-water-tropical-islands
 git checkout episode-1-project-setup   # the episode you want
 npm install
 npm run dev
@@ -37,10 +37,10 @@ npm run dev
 
 | # | Episode | Branch |
 |---|---------|--------|
-| 1 | Project Setup & The Render Loop | [`episode-1-project-setup`](https://github.com/marcelkmedia/threejs-water-island-maldives/tree/episode-1-project-setup) ✅ |
-| 2 | Your First Mesh: A Cube on a Plane | [`episode-2-cube-on-plane`](https://github.com/marcelkmedia/threejs-water-island-maldives/tree/episode-2-cube-on-plane) ✅ |
-| 3 | Lights & Shadows | [`episode-3-lights-and-shadows`](https://github.com/marcelkmedia/threejs-water-island-maldives/tree/episode-3-lights-and-shadows) ✅ |
-| 4 | A Free-Moving Camera | [`episode-4-free-moving-camera`](https://github.com/marcelkmedia/threejs-water-island-maldives/tree/episode-4-free-moving-camera) ✅ |
+| 1 | Project Setup & The Render Loop | [`episode-1-project-setup`](https://github.com/marcelkmedia/threejs-water-tropical-islands/tree/episode-1-project-setup) ✅ |
+| 2 | Your First Mesh: A Cube on a Plane | [`episode-2-cube-on-plane`](https://github.com/marcelkmedia/threejs-water-tropical-islands/tree/episode-2-cube-on-plane) ✅ |
+| 3 | Lights & Shadows | [`episode-3-lights-and-shadows`](https://github.com/marcelkmedia/threejs-water-tropical-islands/tree/episode-3-lights-and-shadows) ✅ |
+| 4 | A Free-Moving Camera | [`episode-4-free-moving-camera`](https://github.com/marcelkmedia/threejs-water-tropical-islands/tree/episode-4-free-moving-camera) ✅ |
 | 5 | Stylized Look & Materials | _coming soon_ |
 | 6 | Sculpting the Island | _coming soon_ |
 | 7 | The Ocean Surface: Gerstner Waves | _coming soon_ |
