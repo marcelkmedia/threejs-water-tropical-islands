@@ -12,7 +12,7 @@ export class FlyCamera {
 
   // Where we're looking, and whether we're currently flying.
   private yaw = 0;        // turn left / right (radians)
-  private pitch = -0.2;   // look up / down — starts tilted slightly down at the cube
+  private pitch = -0.4;   // look up / down — starts tilted down to look over the atoll
   private flying = false; // true only while the right button is held (pointer lock)
   private keys = new Set<string>(); // the movement keys currently held down
 

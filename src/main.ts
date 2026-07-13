@@ -1,5 +1,6 @@
 import * as THREE from 'three/webgpu';
 import { FlyCamera } from './FlyCamera';
+import { createTerrain } from './terrain';
 
 // Grab the two elements we created in index.html.
 const canvas = document.querySelector<HTMLCanvasElement>('#app')!;
@@ -27,42 +28,30 @@ renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x7ec8e3); // tropical sky blue
 
+// Distance fog: fade the far sea floor into the sky colour toward the horizon.
+scene.fog = new THREE.Fog(0x7ec8e3, 20, 95);
+
 const camera = new THREE.PerspectiveCamera(
   60,                                     // field of view, in degrees
   window.innerWidth / window.innerHeight, // aspect ratio
   0.1,                                    // near clip plane
   100,                                    // far clip plane
 );
-camera.position.set(0, 1, 3); // a little up, a little back
+camera.position.set(0, 10, 34); // up and back, looking out over the atoll
 
 // Set up the fly camera (defined in FlyCamera.ts).
 const dot = document.querySelector<HTMLDivElement>('#dot')!;
 const flyCamera = new FlyCamera(camera, renderer.domElement, dot);
 
-// A flat ground plane. PlaneGeometry is born standing up (facing +Z), so we
-// tip it back 90° to lie flat on the ground.
-const ground = new THREE.Mesh(
-  new THREE.PlaneGeometry(10, 10),
-  new THREE.MeshStandardMaterial({ color: 0xe8d8b0 }), // warm sand
-);
-ground.rotation.x = -Math.PI / 2;
-ground.receiveShadow = true; // the ground shows shadows cast onto it
+// Build the atoll terrain (all the noise + shaping lives in terrain.ts).
+const ground = createTerrain();
 scene.add(ground);
-
-// A cube, lifted so it rests ON the ground instead of halfway through it.
-const cube = new THREE.Mesh(
-  new THREE.BoxGeometry(1, 1, 1),
-  new THREE.MeshStandardMaterial({ color: 0xcc7a4a }), // terracotta
-);
-cube.position.y = 0.5;
-cube.castShadow = true; // the cube blocks light and casts a shadow
-scene.add(cube);
 
 // Ambient light: a soft, even glow from all directions so nothing is pure black.
 const ambient = new THREE.AmbientLight(0xffffff, 0.6);
 scene.add(ambient);
 
-// Directional light: parallel rays like the sun, giving the cube light and dark sides.
+// Directional light: parallel rays like the sun, lighting the terrain's slopes.
 const sun = new THREE.DirectionalLight(0xffffff, 2);
 sun.position.set(3, 5, 2);
 sun.castShadow = true; // this light casts shadows
@@ -101,9 +90,6 @@ await renderer.init();
 renderer.setAnimationLoop(() => {
   timer.update();
   const dt = timer.getDelta(); // seconds since the previous frame
-
-  // Spin the cube at a steady 0.6 radians per second (frame-rate independent).
-  cube.rotation.y += dt * 0.6;
 
   // Update the fly camera (mouse look + WASD movement).
   flyCamera.update(dt);
