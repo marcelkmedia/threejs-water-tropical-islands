@@ -1,4 +1,4 @@
-# Maldives — 3D Water & Islands (Three.js + WebGPU)
+# Tropical Islands — 3D Water & Islands (Three.js + WebGPU)
 
 Companion code for the **3D Water & Islands** course: building a stylized,
 cartoonish tropical island scene with high-quality water in **Three.js**, rendered
