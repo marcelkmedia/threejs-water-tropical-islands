@@ -33,7 +33,7 @@ function fractalNoise(x: number, z: number) {
 // Atoll shape: a flat sea floor with a broken ring of islands + sandbanks.
 const SEA_FLOOR = -1.2;   // the flat sea floor sits below the (future) waterline at 0
 const ATOLL_RADIUS = 16;  // the ring of islands sits this far from the centre
-const RIM_WIDTH = 5;      // how broad the ring is
+const RIM_WIDTH = 7;      // how broad the ring is
 
 function terrainHeight(x: number, z: number) {
   // Distance from the centre, gently warped so the ring isn't a perfect circle.
