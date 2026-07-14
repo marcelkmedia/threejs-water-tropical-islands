@@ -43,7 +43,7 @@ npm run dev
 | 4 | A Free-Moving Camera | [`episode-4-free-moving-camera`](https://github.com/marcelkmedia/threejs-water-tropical-islands/tree/episode-4-free-moving-camera) ✅ |
 | 5 | Terrain from Noise | [`episode-5-terrain`](https://github.com/marcelkmedia/threejs-water-tropical-islands/tree/episode-5-terrain) ✅ |
 | 6 | Colour the Island | [`episode-6-colour`](https://github.com/marcelkmedia/threejs-water-tropical-islands/tree/episode-6-colour) ✅ |
-| 7 | The Ocean Surface: Gerstner Waves | _coming soon_ |
+| 7 | The Ocean Surface | [`episode-7-ocean-waves`](https://github.com/marcelkmedia/threejs-water-tropical-islands/tree/episode-7-ocean-waves) ✅ |
 | 8 | Water Color: Depth, Gradient & Fresnel | _coming soon_ |
 | 9 | Refraction & Transparency | _coming soon_ |
 | 10 | Shorelines & Foam | _coming soon_ |
